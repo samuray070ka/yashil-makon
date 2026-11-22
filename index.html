@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yashil Iqtisodiyot — O‘zbekistonning yashil iqtisodiyoti</title>
+<meta name="description" content="O‘zbekiston yashil iqtisodiyoti: quyosh, shamol, gidroenergiya, suv, transport va qishloq xo‘jaligi — interaktiv 3D atlas va kalkulyator.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05080f;--card:rgba(12,20,32,.78);--g:#00e68a;--gd:#00b86b;--glow:rgba(0,230,138,.3);--t:#e8f5ef;--m:#8ba39a;--b:rgba(0,230,138,.18);--y:#ffd166;--c:#00c4ff}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--t);overflow-x:hidden;line-height:1.6}
+#cv{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 70% 40%,#0a1a26,#02050a 70%)}
+#cv canvas{display:block;width:100%!important;height:100%!important}
+.ui{position:relative;z-index:10}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:linear-gradient(rgba(5,8,15,.92),transparent);backdrop-filter:blur(10px)}
+.logo{font:700 1.3rem 'Space Grotesk';display:flex;align-items:center;gap:.55rem;color:var(--t);text-decoration:none}
+.logo i{width:28px;height:28px;background:linear-gradient(135deg,var(--g),var(--c));border-radius:8px;display:grid;place-items:center;font-style:normal;font-size:14px}
+.links{display:flex;gap:1.6rem;list-style:none;align-items:center}
+.links a{color:var(--m);text-decoration:none;font-size:.9rem;font-weight:500;transition:.25s}.links a:hover{color:var(--g)}
+.links .cta{background:var(--g);color:#03140c;padding:.5rem 1.2rem;border-radius:99px;font-weight:600}.links .cta:hover{color:#03140c;box-shadow:0 0 24px var(--glow)}
+.burger{display:none;background:none;border:1px solid var(--b);color:var(--g);border-radius:10px;padding:.4rem .7rem;font-size:1.1rem}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 2.5rem 6rem;max-width:760px}
+.badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,230,138,.1);border:1px solid var(--b);color:var(--g);font-size:.8rem;font-weight:600;padding:.4rem .9rem;border-radius:99px;margin-bottom:1.3rem;align-self:flex-start}
+.badge b{width:8px;height:8px;background:var(--g);border-radius:50%;animation:p 1.6s infinite}@keyframes p{50%{opacity:.3}}
+h1{font:700 clamp(2.6rem,6vw,4.4rem)/1.06 'Space Grotesk';letter-spacing:-.03em;margin-bottom:1.2rem}
+h1 span,.grad{background:linear-gradient(90deg,var(--g),#5ce1b0,var(--c));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.12rem;color:var(--m);max-width:540px;margin-bottom:2rem}
+.row{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.6rem;border-radius:99px;font:600 .95rem Inter;text-decoration:none;transition:.25s;cursor:pointer;border:0}
+.bp{background:var(--g);color:#03140c}.bp:hover{box-shadow:0 0 32px var(--glow);transform:translateY(-2px)}
+.bg{background:rgba(5,8,15,.5);color:var(--t);border:1px solid rgba(255,255,255,.16)}.bg:hover{border-color:var(--g);color:var(--g)}
+.ticker{margin-top:2.2rem;display:flex;gap:2.2rem;flex-wrap:wrap}.ticker div b{display:block;font:700 1.8rem 'Space Grotesk';color:var(--g)}.ticker div span{font-size:.8rem;color:var(--m)}
+section{position:relative;padding:5.5rem 2.5rem;max-width:1200px;margin:0 auto}
+.lab{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:.7rem}
+.ttl{font:700 clamp(1.8rem,4vw,2.7rem)/1.15 'Space Grotesk';letter-spacing:-.02em;margin-bottom:1rem;max-width:680px}
+.dsc{color:var(--m);font-size:1.04rem;max-width:620px;margin-bottom:2.6rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.4rem}
+.card{background:var(--card);border:1px solid var(--b);border-radius:20px;padding:1.7rem;backdrop-filter:blur(16px);transition:.3s}
+.card:hover{transform:translateY(-6px);border-color:rgba(0,230,138,.45);box-shadow:0 20px 40px rgba(0,0,0,.35),0 0 30px var(--glow)}
+.ic{width:48px;height:48px;border-radius:14px;background:rgba(0,230,138,.12);display:grid;place-items:center;font-size:1.4rem;margin-bottom:1.1rem}
+.card h3{font:600 1.2rem 'Space Grotesk';margin-bottom:.55rem}.card p{color:var(--m);font-size:.94rem}
+.st{margin-top:1rem;font:700 1.6rem 'Space Grotesk';color:var(--g)}.st span{display:block;font:500 .82rem Inter;color:var(--m)}
+.bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.5rem;padding:2rem;background:var(--card);border:1px solid var(--b);border-radius:24px;backdrop-filter:blur(16px);text-align:center}
+.bar .n{font:700 2.1rem 'Space Grotesk';color:var(--g);line-height:1.1}.bar .l{font-size:.84rem;color:var(--m);margin-top:.3rem}
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.2rem}
+.rc{background:var(--card);border:1px solid var(--b);border-radius:18px;padding:1.4rem;display:flex;gap:1rem;transition:.25s;cursor:pointer}
+.rc:hover,.rc.on{border-color:var(--g);box-shadow:0 0 24px var(--glow)}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--g);box-shadow:0 0 12px var(--g);flex:none;margin-top:.45rem}
+.rc h4{font-size:1.05rem;margin-bottom:.25rem}.rc p{font-size:.9rem;color:var(--m)}.rc small{color:var(--g);font-size:.78rem;font-weight:600}
+.tl{position:relative;margin-left:.6rem;border-left:2px solid var(--b);padding-left:2rem;display:grid;gap:1.6rem}
+.tl>div{position:relative;background:var(--card);border:1px solid var(--b);border-radius:16px;padding:1.2rem 1.5rem;backdrop-filter:blur(14px)}
+.tl>div:before{content:"";position:absolute;left:calc(-2rem - 7px);top:1.5rem;width:12px;height:12px;border-radius:50%;background:var(--g);box-shadow:0 0 14px var(--g)}
+.tl b{font:700 1.15rem 'Space Grotesk';color:var(--g)}.tl h4{margin:.1rem 0 .2rem}.tl p{color:var(--m);font-size:.92rem}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;background:var(--card);border:1px solid var(--b);border-radius:26px;padding:2.2rem;backdrop-filter:blur(18px)}
+.calc label{font-size:.9rem;color:var(--m);display:block;margin:1.1rem 0 .4rem}.calc label:first-child{margin-top:0}
+.calc output{color:var(--g);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--g)}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.res div{background:rgba(0,230,138,.07);border:1px solid var(--b);border-radius:16px;padding:1.1rem}
+.res b{display:block;font:700 1.55rem 'Space Grotesk';color:var(--g)}.res span{font-size:.8rem;color:var(--m)}
+.note{font-size:.8rem;color:var(--m);margin-top:1rem}
+.faq details{background:var(--card);border:1px solid var(--b);border-radius:16px;padding:1.1rem 1.4rem;margin-bottom:.9rem;backdrop-filter:blur(14px)}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem}.faq summary:after{content:"+";color:var(--g);font-size:1.3rem}
+.faq details[open] summary:after{content:"–"}.faq p{color:var(--m);margin-top:.8rem;font-size:.95rem}
+.ctab{text-align:center;padding:6rem 2.5rem 7rem}.cb{max-width:700px;margin:0 auto;background:linear-gradient(145deg,rgba(0,230,138,.1),rgba(0,100,80,.05));border:1px solid var(--b);border-radius:28px;padding:3.2rem 2.4rem;backdrop-filter:blur(20px)}
+.cb h2{font:700 clamp(1.8rem,4vw,2.4rem) 'Space Grotesk';margin-bottom:1rem}.cb p{color:var(--m);margin-bottom:1.8rem}
+.sub{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}.sub input{flex:1;min-width:210px;max-width:320px;padding:.85rem 1.2rem;border-radius:99px;border:1px solid var(--b);background:rgba(5,8,15,.7);color:var(--t);font:inherit}
+.ok{color:var(--g);margin-top:1rem;min-height:1.4rem;font-size:.92rem}
+footer{padding:2.5rem;text-align:center;color:var(--m);font-size:.88rem;border-top:1px solid rgba(255,255,255,.06);background:rgba(5,8,15,.85)}footer p+p{margin-top:.4rem;font-size:.78rem}
+#tip{position:fixed;pointer-events:none;background:rgba(8,14,22,.94);border:1px solid var(--b);padding:.7rem 1rem;border-radius:12px;font-size:.88rem;z-index:200;opacity:0;transition:opacity .2s;max-width:230px}#tip strong{color:var(--g);display:block}
+#ld{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;color:var(--m);transition:.6s}#ld.h{opacity:0;visibility:hidden}
+.ring{width:48px;height:48px;border:3px solid rgba(0,230,138,.2);border-top-color:var(--g);border-radius:50%;animation:s .8s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+#top{position:fixed;right:1.5rem;bottom:1.5rem;z-index:100;width:46px;height:46px;border-radius:50%;border:1px solid var(--b);background:var(--card);color:var(--g);font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s}#top.v{opacity:1;pointer-events:auto}
+@media(max-width:820px){nav{padding:.9rem 1.2rem}.burger{display:block}.links{display:none;position:absolute;top:100%;left:1rem;right:1rem;flex-direction:column;background:rgba(8,14,22,.97);border:1px solid var(--b);border-radius:18px;padding:1.2rem}.links.o{display:flex}.hero{padding:0 1.25rem 4rem}section{padding:4rem 1.25rem}.bar{grid-template-columns:1fr 1fr}.calc{grid-template-columns:1fr;padding:1.5rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="ld"><div class="ring"></div>Yashil Atlas yuklanmoqda...</div>
+<div id="cv"></div><div id="tip"></div>
+<div class="ui">
+<nav>
+ <a href="#" class="logo"><i>🌍</i>Yashil Atlas</a>
+ <button class="burger" id="bg" aria-label="Menyu">☰</button>
+ <ul class="links" id="lk">
+  <li><a href="#potential">Potensial</a></li><li><a href="#sectors">Sohalar</a></li><li><a href="#regions">Hududlar</a></li>
+  <li><a href="#roadmap">Yo‘l xaritasi</a></li><li><a href="#calc">Kalkulyator</a></li><li><a href="#faq">Savollar</a></li>
+  <li><a href="#cta" class="cta">Qo‘shilish</a></li>
+ </ul>
+</nav>
+
+<header class="hero">
+ <div class="badge"><b></b>O‘zbekiston · Yashil iqtisodiyot 2026</div>
+ <h1>Yashil <span>Atlas</span><br>Kelajakni ko‘ring</h1>
+ <p>Quyosh, shamol, suv va yangi texnologiyalar — O‘zbekistonning barqaror kelajagi interaktiv 3D globus, hududiy xarita va shaxsiy tejash kalkulyatorida.</p>
+ <div class="row"><a href="#potential" class="btn bp">Potensialni ko‘rish →</a><a href="#calc" class="btn bg">Tejashni hisoblash</a></div>
+ <div class="ticker">
+  <div><b data-n="300" data-s="+">0</b><span>quyoshli kun / yil</span></div>
+  <div><b data-n="40" data-s="%">0</b><span>2030-yil maqsadi (elektr)</span></div>
+  <div><b data-n="35" data-s="%">0</b><span>emissiyani qisqartirish</span></div>
+ </div>
+</header>
+
+<section id="potential">
+ <div class="lab rv">Energiya potensiali</div>
+ <h2 class="ttl rv">O‘zbekistonning <span class="grad">yashil qudrati</span></h2>
+ <p class="dsc rv">Mamlakat yiliga 300 dan ortiq quyoshli kun, ochiq cho‘llar va tog‘ daryolariga ega. Hukumat 2030-yilga borib elektr energiyasining kamida 40 foizini qayta tiklanuvchi manbalardan ishlab chiqarishni rejalashtirgan.</p>
+ <div class="cards">
+  <div class="card rv"><div class="ic">☀️</div><h3>Quyosh energiyasi</h3><p>Qizilqum, Navoiy va janubiy hududlarda nurlanish yuqori. Yirik fotoelektrik stansiyalar va tomga o‘rnatiladigan panellar tez ko‘paymoqda.</p><div class="st">300+<span>quyoshli kun yiliga</span></div></div>
+  <div class="card rv"><div class="ic">💨</div><h3>Shamol energiyasi</h3><p>Qoraqalpog‘iston, Buxoro va Navoiy tekisliklarida yuzlab megavatt quvvatli shamol parklari qurilmoqda.</p><div class="st">Yuzlab MW<span>quvvatli yirik loyihalar</span></div></div>
+  <div class="card rv"><div class="ic">💧</div><h3>Gidroenergiya</h3><p>Chorvoq va Farg‘ona vodiysidagi GESlar, shuningdek kichik GESlar suv resursidan toza elektr beradi.</p><div class="st">Kichik GES<span>yangi imkoniyat</span></div></div>
+  <div class="card rv"><div class="ic">🔋</div><h3>Energiya saqlash</h3><p>Batareya tizimlari quyosh va shamolning o‘zgaruvchan ishlab chiqarishini barqarorlashtiradi va tarmoqni mustahkamlaydi.</p><div class="st">Yangi yo‘nalish<span>tarmoq barqarorligi uchun</span></div></div>
+ </div>
+ <div class="bar rv">
+  <div><div class="n" data-n="2019" data-s="">0</div><div class="l">Yashil iqtisodiyotga o‘tish strategiyasi (2019–2030)</div></div>
+  <div><div class="n" data-n="40" data-s="%">0</div><div class="l">Qayta tiklanuvchi ulush, 2030</div></div>
+  <div><div class="n" data-n="35" data-s="%">0</div><div class="l">GDP birligiga emissiya kamayishi (2010 ga nisbatan)</div></div>
+  <div><div class="n" data-n="200" data-s=" mln">0</div><div class="l">“Yashil makon” doirasida yiliga ko‘chat</div></div>
+ </div>
+</section>
+
+<section id="sectors">
+ <div class="lab rv">Yashil sohalar</div>
+ <h2 class="ttl rv">Energiya — faqat <span class="grad">boshlanishi</span></h2>
+ <p class="dsc rv">Yashil iqtisodiyot qishloq xo‘jaligidan shaharlargacha butun hayotni qamrab oladi.</p>
+ <div class="cards">
+  <div class="card rv"><div class="ic">🌾</div><h3>Aqlli qishloq xo‘jaligi</h3><p>Tomchilatib sug‘orish va lazerli tekislash suvni sezilarli tejaydi, hosildorlikni oshiradi va sho‘rlanishni kamaytiradi.</p></div>
+  <div class="card rv"><div class="ic">🚗</div><h3>Elektr transport</h3><p>Jizzaxda elektromobil ishlab chiqarish yo‘lga qo‘yilgan, shaharlarda zaryadlash stansiyalari tarmog‘i kengayib bormoqda.</p></div>
+  <div class="card rv"><div class="ic">🌊</div><h3>Suv va Orol</h3><p>Orol dengizining qurigan tubida saksovul va boshqa o‘simliklar ekilib, chang-tuz bo‘ronlari kamaytirilmoqda.</p></div>
+  <div class="card rv"><div class="ic">♻️</div><h3>Chiqindilarni qayta ishlash</h3><p>Chiqindini saralash, qayta ishlash va resursga aylantirish yangi ish o‘rinlari va toza shaharlar yaratadi.</p></div>
+  <div class="card rv"><div class="ic">🏠</div><h3>Energiya tejamkor binolar</h3><p>Izolyatsiya, LED yoritish, issiqlik nasoslari va quyosh suv isitgichlari kommunal xarajatni kamaytiradi.</p></div>
+  <div class="card rv"><div class="ic">🌳</div><h3>Yashil hududlar</h3><p>“Yashil makon” umummilliy loyihasi yiliga o‘n millionlab ko‘chat ekib, shaharlarda havo sifatini yaxshilaydi.</p></div>
+ </div>
+</section>
+
+<section id="regions">
+ <div class="lab rv">Hududiy imkoniyatlar</div>
+ <h2 class="ttl rv">Asosiy <span class="grad">yashil zonalar</span></h2>
+ <p class="dsc rv">Hududni bosing — globus unga yo‘naladi. Nuqtalarni to‘g‘ridan-to‘g‘ri globusda ham ko‘rishingiz mumkin.</p>
+ <div class="rg" id="rg"></div>
+</section>
+
+<section id="roadmap">
+ <div class="lab rv">Yo‘l xaritasi</div>
+ <h2 class="ttl rv">Strategiyadan <span class="grad">natijagacha</span></h2>
+ <p class="dsc rv">O‘zbekistonning yashil o‘tish yo‘lidagi asosiy bosqichlar.</p>
+ <div class="tl">
+  <div class="rv"><b>2019</b><h4>Yashil iqtisodiyotga o‘tish strategiyasi</h4><p>2019–2030-yillarga mo‘ljallangan strategiya qabul qilindi: energiya samaradorligi va qayta tiklanuvchi manbalar asosiy yo‘nalish.</p></div>
+  <div class="rv"><b>2021</b><h4>Birinchi yirik quyosh stansiyalari</h4><p>Navoiy viloyatida 100 MW li “Nur Navoiy” quyosh stansiyasi ishga tushdi; “Yashil makon” umummilliy loyihasi boshlandi.</p></div>
+  <div class="rv"><b>2023–2025</b><h4>Xalqaro investorlar bilan keng ko‘lamli loyihalar</h4><p>Quyosh va shamol parklari, energiya saqlash tizimlari bo‘yicha xorijiy kompaniyalar bilan yirik kelishuvlar amalga oshirilmoqda.</p></div>
+  <div class="rv"><b>2030</b><h4>Asosiy maqsadlar</h4><p>Elektr energiyasining kamida 40 foizi qayta tiklanuvchi manbalardan, GDP birligiga issiqxona gazlari emissiyasini 2010-yilga nisbatan 35 foizga kamaytirish.</p></div>
+ </div>
+</section>
+
+<section id="calc">
+ <div class="lab rv">Interaktiv kalkulyator</div>
+ <h2 class="ttl rv">Uyingizga quyosh paneli <span class="grad">foyda keltiradimi?</span></h2>
+ <p class="dsc rv">Oylik elektr iste’molingizni kiriting — taxminiy panel quvvati va ekologik ta’sirni ko‘ring.</p>
+ <div class="calc rv">
+  <div>
+   <label>Oylik iste’mol: <output id="o1">400</output> kWh</label><input type="range" id="kwh" min="100" max="2000" step="50" value="400">
+   <label>Elektr narxi: <output id="o2">1000</output> so‘m/kWh</label><input type="range" id="pr" min="400" max="2500" step="50" value="1000">
+   <label>Quyosh nurlanishi: <output id="o3">1500</output> kWh/kW yiliga</label><input type="range" id="yl" min="1200" max="1800" step="50" value="1500">
+   <p class="note">Natijalar taxminiy hisob-kitob. Aniq baho uchun mutaxassis yoki sertifikatlangan o‘rnatuvchi bilan maslahatlashing.</p>
+  </div>
+  <div class="res">
+   <div><b id="r1">–</b><span>kerakli panel quvvati (kW)</span></div>
+   <div><b id="r2">–</b><span>yillik ishlab chiqarish (kWh)</span></div>
+   <div><b id="r3">–</b><span>yillik tejam (so‘m)</span></div>
+   <div><b id="r4">–</b><span>CO₂ kamayishi (t/yil)</span></div>
+   <div style="grid-column:1/-1"><b id="r5">–</b><span>bu taxminan nechta daraxt yutadigan CO₂ ga teng</span></div>
+  </div>
+ </div>
+</section>
+
+<section id="faq" class="faq">
+ <div class="lab rv">Ko‘p beriladigan savollar</div>
+ <h2 class="ttl rv">Yashil iqtisodiyot <span class="grad">nima?</span></h2>
+ <details class="rv"><summary>Yashil iqtisodiyot nima degani?</summary><p>Bu tabiiy resurslardan oqilona foydalanish, chiqindi va emissiyani kamaytirish hamda ayni paytda iqtisodiy o‘sish va yangi ish o‘rinlarini ta’minlaydigan rivojlanish modeli.</p></details>
+ <details class="rv"><summary>Nega O‘zbekiston uchun muhim?</summary><p>Mamlakat qurg‘oqchilik, suv tanqisligi va elektr talabining o‘sishi bilan yuzma-yuz. Quyosh va shamol resurslari boy bo‘lgani uchun yashil yechimlar ham iqtisodiy, ham ekologik jihatdan foydali.</p></details>
+ <details class="rv"><summary>Oddiy fuqaro nima qila oladi?</summary><p>Energiya tejamkor chiroq va maishiy texnika, suvni tejash, chiqindini saralash, ko‘chat ekish, jamoat transportidan foydalanish va imkon bo‘lsa tomga quyosh paneli o‘rnatish.</p></details>
+ <details class="rv"><summary>Raqamlar qayerdan olingan?</summary><p>Strategiya maqsadlari (2030-yil, 40 foiz va 35 foiz) rasmiy hujjatlarga asoslangan. Loyiha va quvvatlar tez o‘zgaradi — eng yangi ma’lumot uchun Energetika vazirligi va xalqaro tashkilotlar hisobotlariga qarang.</p></details>
+</section>
+
+<section class="ctab" id="cta">
+ <div class="cb rv">
+  <h2>Yashil kelajakni <span class="grad">birga quramiz</span></h2>
+  <p>Yangiliklar va yangi loyihalardan xabardor bo‘lish uchun elektron pochtangizni qoldiring.</p>
+  <div class="sub"><input type="email" id="em" placeholder="email@misol.uz"><button class="btn bp" id="sb">Obuna bo‘lish</button></div>
+  <div class="ok" id="ok"></div>
+ </div>
+</section>
+
+<footer><p>Yashil Atlas · O‘zbekiston yashil iqtisodiyoti · 2026</p><p>3D: Three.js · Ma’lumotlar ochiq manbalar va rasmiy strategiyalar asosida, taxminiy</p></footer>
+</div>
+<button id="top" aria-label="Yuqoriga">↑</button>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import*as THREE from 'three';import{OrbitControls}from 'three/addons/controls/OrbitControls.js';
+const $=s=>document.querySelector(s),box=$('#cv'),sc=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,1000);cam.position.set(0,.8,3.8);
+const rd=new THREE.WebGLRenderer({antialias:true,alpha:true});rd.setSize(innerWidth,innerHeight);rd.setPixelRatio(Math.min(devicePixelRatio,2));box.appendChild(rd.domElement);
+const ct=new OrbitControls(cam,rd.domElement);Object.assign(ct,{enableDamping:true,dampingFactor:.05,minDistance:2.2,maxDistance:8,enablePan:false,autoRotate:true,autoRotateSpeed:.4});
+sc.add(new THREE.AmbientLight(0x334455,.7));const sl=new THREE.DirectionalLight(0xffffff,1.4);sl.position.set(5,3,5);sc.add(sl);
+const gl=new THREE.PointLight(0x00e68a,.8,20);gl.position.set(-2,1,3);sc.add(gl);
+const eg=new THREE.Group();sc.add(eg);
+eg.add(new THREE.Mesh(new THREE.SphereGeometry(1.4,64,64),new THREE.MeshStandardMaterial({color:0x0a1f2e,roughness:.85,metalness:.1,emissive:0x001a12,emissiveIntensity:.2})));
+[[1.48,.07],[1.55,.04]].forEach(([r,o])=>eg.add(new THREE.Mesh(new THREE.SphereGeometry(r,48,48),new THREE.MeshBasicMaterial({color:0x00e68a,transparent:true,opacity:o,side:THREE.BackSide}))));
+eg.add(new THREE.Mesh(new THREE.SphereGeometry(1.405,36,24),new THREE.MeshBasicMaterial({color:0x00e68a,wireframe:true,transparent:true,opacity:.06})));
+const ll=(la,lo,r)=>{const p=(90-la)*Math.PI/180,t=(lo+180)*Math.PI/180;return new THREE.Vector3(-r*Math.sin(p)*Math.cos(t),r*Math.cos(p),r*Math.sin(p)*Math.sin(t))};
+const main=new THREE.Mesh(new THREE.SphereGeometry(.035,16,16),new THREE.MeshBasicMaterial({color:0x00e68a}));main.position.copy(ll(41.3,64.5,1.42));eg.add(main);
+const pr=new THREE.Mesh(new THREE.RingGeometry(.06,.09,32),new THREE.MeshBasicMaterial({color:0x00e68a,transparent:true,opacity:.5,side:THREE.DoubleSide}));pr.position.copy(main.position);pr.lookAt(0,0,0);eg.add(pr);
+const R=[
+{n:"Navoiy viloyati",la:40.1,lo:65.4,d:"Quyosh energiyasi markazi: yirik fotoelektrik stansiyalar va ochiq maydonlar.",t:"☀️ Quyosh"},
+{n:"Qoraqalpog‘iston",la:43,lo:59,d:"Keng cho‘l maydonlari — shamol va quyosh loyihalari hamda Orol bo‘yi tiklanishi.",t:"💨 Shamol · 🌿 Orol"},
+{n:"Samarqand",la:39.65,lo:66.96,d:"Yuqori quyosh nurlanishi, quyosh stansiyalari va yashil turizm imkoniyati.",t:"☀️ Quyosh"},
+{n:"Toshkent",la:41.3,lo:69.24,d:"Chorvoq gidroenergetika majmuasi, elektr transport va aqlli shahar yechimlari.",t:"💧 GES · 🚗 EV"},
+{n:"Farg‘ona vodiysi",la:40.4,lo:71.8,d:"Kichik GESlar, tomchilatib sug‘orish va qishloq xo‘jaligida yashil yechimlar.",t:"💧 GES · 🌾 Agro"},
+{n:"Surxondaryo",la:37.9,lo:67.3,d:"Janubiy quyosh zonasi: yuqori nurlanish va yangi energetika loyihalari.",t:"☀️ Quyosh"}];
+const mk=[],rg=$('#rg');
+R.forEach((r,i)=>{const m=new THREE.Mesh(new THREE.SphereGeometry(.02,12,12),new THREE.MeshBasicMaterial({color:0x5ce1b0}));m.position.copy(ll(r.la,r.lo,1.415));m.userData=r;eg.add(m);mk.push(m);
+eg.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([m.position.clone().normalize().multiplyScalar(1.4),m.position]),new THREE.LineBasicMaterial({color:0x00e68a,transparent:true,opacity:.4})));
+const c=document.createElement('div');c.className='rc rv';c.innerHTML=`<div class="dot"></div><div><h4>${r.n}</h4><p>${r.d}</p><small>${r.t}</small></div>`;
+c.onclick=()=>{focus(m);scrollTo({top:0,behavior:'smooth'});document.querySelectorAll('.rc').forEach(x=>x.classList.remove('on'));c.classList.add('on')};rg.appendChild(c)});
+let tgt=null;function focus(m){tgt=m.position.clone().normalize().multiplyScalar(3.4);ct.autoRotate=false;eg.rotation.y=0}
+const N=1400,pp=new Float32Array(N*3),cc=new Float32Array(N*3);
+for(let i=0;i<N;i++){const r=1.7+Math.random()*1.9,t=Math.random()*6.283,p=Math.acos(2*Math.random()-1);pp.set([r*Math.sin(p)*Math.cos(t),r*Math.sin(p)*Math.sin(t),r*Math.cos(p)],i*3);cc.set([.1,.4+Math.random()*.6,.4+Math.random()*.3],i*3)}
+const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pp,3));pg.setAttribute('color',new THREE.BufferAttribute(cc,3));
+const pts=new THREE.Points(pg,new THREE.PointsMaterial({size:.018,vertexColors:true,transparent:true,opacity:.65,depthWrite:false,blending:THREE.AdditiveBlending}));sc.add(pts);
+const rc=new THREE.Raycaster(),ms=new THREE.Vector2(),tip=$('#tip');
+addEventListener('pointermove',e=>{ms.set(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1);rc.setFromCamera(ms,cam);const h=rc.intersectObjects(mk);
+if(h.length){const d=h[0].object.userData;tip.innerHTML=`<strong>${d.n}</strong>${d.d}`;tip.style.left=e.clientX+14+'px';tip.style.top=e.clientY+14+'px';tip.style.opacity=1}else tip.style.opacity=0});
+let tm=0;(function a(){requestAnimationFrame(a);tm+=.01;const s=Math.sin(tm*2.5);main.scale.setScalar(1+s*.25);pr.scale.setScalar(1+s*.4);pr.material.opacity=.25+s*.25;
+pts.rotation.y+=.0006;if(ct.autoRotate)eg.rotation.y+=.0008;if(tgt){cam.position.lerp(tgt,.05);if(cam.position.distanceTo(tgt)<.02)tgt=null}ct.update();rd.render(sc,cam)})();
+addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();rd.setSize(innerWidth,innerHeight)});
+const hide=()=>$('#ld').classList.add('h');addEventListener('load',()=>setTimeout(hide,500));setTimeout(hide,1500);
+
+// UI
+$('#bg').onclick=()=>$('#lk').classList.toggle('o');document.querySelectorAll('#lk a').forEach(a=>a.onclick=()=>$('#lk').classList.remove('o'));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const n=+e.target.dataset.n,s=e.target.dataset.s||'',t0=performance.now();
+(function f(t){const k=Math.min((t-t0)/1600,1);e.target.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)})(t0)}),{threshold:.5});
+document.querySelectorAll('[data-n]').forEach(e=>cio.observe(e));
+const tp=$('#top');addEventListener('scroll',()=>tp.classList.toggle('v',scrollY>600));tp.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+const f=n=>Math.round(n).toLocaleString('ru-RU').replace(/\u00a0/g,' ');
+function calc(){const k=+$('#kwh').value,p=+$('#pr').value,y=+$('#yl').value;$('#o1').textContent=k;$('#o2').textContent=p;$('#o3').textContent=y;
+const yr=k*12,kw=yr/y,co=yr*.5/1000;$('#r1').textContent=kw.toFixed(1);$('#r2').textContent=f(yr);$('#r3').textContent=f(yr*p);$('#r4').textContent=co.toFixed(1);$('#r5').textContent=f(co*1000/21)+' ta'}
+['kwh','pr','yl'].forEach(i=>$('#'+i).oninput=calc);calc();
+$('#sb').onclick=()=>{const v=$('#em').value.trim();$('#ok').textContent=/^\S+@\S+\.\S+$/.test(v)?'Rahmat! Siz obuna bo‘ldingiz (demo).':'Iltimos, to‘g‘ri email kiriting.'};
+</script>
+</body>
+</html>
